@@ -10,8 +10,8 @@ spec:
   template:
     metadata:
       labels:
-	networkservicemesh.io/app: "{{ .Values.prefix }}-proxy2"
-	networkservicemesh.io/impl: "sfc-{{ .Values.prefix }}"
+        networkservicemesh.io/app: "{{ .Values.prefix }}-proxy2"
+        networkservicemesh.io/impl: "sfc-{{ .Values.prefix }}"
     spec:
       serviceAccount: nsc-acc
       containers:

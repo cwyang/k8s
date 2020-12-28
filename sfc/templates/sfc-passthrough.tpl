@@ -10,8 +10,8 @@ spec:
   template:
     metadata:
       labels:
-	networkservicemesh.io/app: "{{ .Values.prefix }}-passthrough"
-	networkservicemesh.io/impl: "sfc-{{ .Values.prefix }}"
+        networkservicemesh.io/app: "{{ .Values.prefix }}-passthrough"
+        networkservicemesh.io/impl: "sfc-{{ .Values.prefix }}"
     spec:
       serviceAccount: nse-acc
       containers:
@@ -25,7 +25,7 @@ spec:
               value: "sfc-{{ .Values.prefix }}"
             - name: ENDPOINT_LABELS
               value: "app={{ .Values.prefix }}-passthrough"
-	    - name: CLIENT_NETWORK_SERVICE
+            - name: CLIENT_NETWORK_SERVICE
               value: "sfc-{{ .Values.prefix }}"
             - name: CLIENT_LABELS
               value: "app={{ .Values.prefix }}-passthrough"
