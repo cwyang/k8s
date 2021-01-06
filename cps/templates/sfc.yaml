@@ -1,0 +1,25 @@
+---
+apiVersion: networkservicemesh.io/v1alpha1
+kind: NetworkService
+metadata:
+  name: sfc-{{ .Values.prefix }}
+spec:
+  payload: IP
+  matches:
+    - match:
+      sourceSelector:
+        app: test
+{{- if .Values.global.comment }}
+        app: {{ .Values.prefix }}-proxy
+{{- end }}
+      route:
+        - destination:
+          destinationSelector:
+            app: {{ .Values.prefix }}-server
+{{- if .Values.global.comment }}
+    - match:
+      route:
+        - destination:
+          destinationSelector:
+            app: {{ .Values.prefix }}-proxy
+{{- end }}

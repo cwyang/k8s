@@ -1,0 +1,14 @@
+---
+# Default values for vpn.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+prefix: cps
+registry: docker.io
+org: networkservicemesh
+tag: v0.2.0
+pullPolicy: IfNotPresent
+
+global:
+  # set to true to enable Jaeger tracing for NSM components
+  JaegerTracing: false
