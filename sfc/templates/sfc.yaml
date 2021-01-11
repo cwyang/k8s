@@ -31,4 +31,4 @@ spec:
       route:
         - destination:
           destinationSelector:
-            app: {{ .Values.prefix }}-proxy1
+            app: {{ .Values.prefix }}-server

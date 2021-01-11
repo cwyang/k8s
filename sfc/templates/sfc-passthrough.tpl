@@ -21,20 +21,22 @@ spec:
           env:
             - name: TEST_APPLICATION
               value: "vppagent-firewall-nse"
-            - name: ENDPOINT_NETWORK_SERVICE
+            - name: ADVERTISE_NSE_NAME
               value: "sfc-{{ .Values.prefix }}"
-            - name: ENDPOINT_LABELS
+            - name: ADVERTISE_NSE_LABELS
               value: "app={{ .Values.prefix }}-passthrough"
-            - name: CLIENT_NETWORK_SERVICE
+            - name: OUTGOING_NSC_NAME
               value: "sfc-{{ .Values.prefix }}"
-            - name: CLIENT_LABELS
+            - name: OUTGOING_NSC_LABELS
               value: "app={{ .Values.prefix }}-passthrough"
+{{- if .Values.global.JaegerTracing }}
             - name: TRACER_ENABLED
               value: {{ .Values.global.JaegerTracing | default false | quote }}
             - name: JAEGER_AGENT_HOST
               value: jaeger.nsm-system
             - name: JAEGER_AGENT_PORT
               value: "6831"
+{{- end }}
           resources:
             limits:
               networkservicemesh.io/socket: 1

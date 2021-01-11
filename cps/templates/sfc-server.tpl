@@ -4,13 +4,13 @@ kind: Deployment
 spec:
   selector:
     matchLabels:
-      networkservicemesh.io/app: "{{ .Values.prefix }}-server"
+      networkservicemesh.io/app: "{{ .Values.prefix }}-server-foo"
       networkservicemesh.io/impl: "sfc-{{ .Values.prefix }}"
   replicas: 1
   template:
     metadata:
       labels:
-        networkservicemesh.io/app: "{{ .Values.prefix }}-server"
+        networkservicemesh.io/app: "{{ .Values.prefix }}-server-foo"
         networkservicemesh.io/impl: "sfc-{{ .Values.prefix }}"
     spec:
       serviceAccount: nse-acc
@@ -33,7 +33,7 @@ spec:
             - name: ADVERTISE_NSE_NAME
               value: "sfc-{{ .Values.prefix }}"
             - name: ADVERTISE_NSE_LABELS
-              value: "app={{ .Values.prefix }}-server"
+              value: "app={{ .Values.prefix }}-server-foo"
             - name: IP_ADDRESS
               value: "172.16.1.0/24"
 {{- if .Values.global.JaegerTracing }}

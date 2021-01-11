@@ -19,6 +19,15 @@ spec:
           image: alpine:latest
           imagePullPolicy: {{ .Values.pullPolicy }}
           command: ['tail', '-f', '/dev/null']
+          env:
+            - name: ADVERTISE_NSE_NAME
+              value: "sfc-{{ .Values.prefix }}"
+            - name: ADVERTISE_NSE_LABELS
+              value: "app={{ .Values.prefix }}-proxy2"
+            - name: OUTGOING_NSE_NAME
+              value: "sfc-{{ .Values.prefix }}"
+            - name: OUTGOING_NSC_LABELS
+              value: "app={{ .Values.prefix }}-proxy2"
 metadata:
   name: {{ .Values.prefix }}-proxy2
   namespace: {{ .Release.Namespace }}

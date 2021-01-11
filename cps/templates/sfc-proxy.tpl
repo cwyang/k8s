@@ -19,6 +19,7 @@ spec:
           image: alpine:latest
           imagePullPolicy: {{ .Values.pullPolicy }}
           command: ['tail', '-f', '/dev/null']
+{{- if .Values.global.JaegerTracing }}
           env:
             - name: TEST_APPLICATION
               value: "proxy-nse"
@@ -32,7 +33,6 @@ spec:
               value: "sfc-{{ .Values.prefix }}"
             - name: OUTGOING_NSC_LABELS
               value: app=test
-{{- if .Values.global.JaegerTracing }}
             - name: TRACER_ENABLED
               value: "true" 
               jvalue: "app={{ .Values.prefix }}-proxy"

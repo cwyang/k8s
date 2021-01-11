@@ -30,18 +30,20 @@ spec:
           command: ["/bin/icmp-responder-nse"]
           imagePullPolicy: {{ .Values.pullPolicy }}
           env:
-            - name: ENDPOINT_NETWORK_SERVICE
+            - name: ADVERTISE_NSE_NAME
               value: "sfc-{{ .Values.prefix }}"
-            - name: ENDPOINT_LABELS
+            - name: ADVERTISE_NSE_LABELS
               value: "app={{ .Values.prefix }}-server"
             - name: IP_ADDRESS
               value: "172.16.1.0/24"
+{{- if .Values.global.JaegerTracing }}
             - name: TRACER_ENABLED
               value: {{ .Values.global.JaegerTracing | default false | quote }}
             - name: JAEGER_AGENT_HOST
               value: jaeger.nsm-system
             - name: JAEGER_AGENT_PORT
               value: "6831"
+{{- end }}
           resources:
             limits:
               networkservicemesh.io/socket: 1

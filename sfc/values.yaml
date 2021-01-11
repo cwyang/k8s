@@ -6,7 +6,7 @@
 prefix: foo
 registry: docker.io
 org: networkservicemesh
-tag: master
+tag: 0.2.0
 pullPolicy: IfNotPresent
 
 global:
