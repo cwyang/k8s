@@ -38,8 +38,11 @@ spec:
           resources:
             limits:
               networkservicemesh.io/socket: 1
-        - name: nginx
-          image: {{ .Values.registry }}/{{ .Values.org }}/nginx:latest
+        - name: busybox
+          image: {{ .Values.registry }}/{{ .Values.org_top }}/busybox:latest
+          args:
+          - sleep
+          - "1000000"
 metadata:
   name: {{ .Values.prefix }}-server-nse
   namespace: {{ .Release.Namespace }}

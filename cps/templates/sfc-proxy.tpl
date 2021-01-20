@@ -44,8 +44,11 @@ spec:
             - mountPath: /etc/vppagent-firewall/config.yaml
               subPath: config.yaml
               name: vppagent-firewall-config-volume
-        - name: nginx
-          image: {{ .Values.registry }}/{{ .Values.org }}/nginx:latest
+        - name: busybox
+          image: {{ .Values.registry }}/{{ .Values.org_top }}/busybox:latest
+          args:
+          - sleep
+          - "1000000"
       volumes:
         - name: vppagent-firewall-config-volume
           configMap:
