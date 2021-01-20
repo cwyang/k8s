@@ -16,7 +16,7 @@ spec:
       serviceAccount: nsc-acc
       containers:
         - name: alpine-img
-          image: alpine:latest
+          image: {{ .Values.registry }}/{{ .Values.org_top }}/alpine:latest
           imagePullPolicy: {{ .Values.pullPolicy }}
           command: ['tail', '-f', '/dev/null']
 metadata:

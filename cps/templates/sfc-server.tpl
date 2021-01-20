@@ -16,9 +16,11 @@ spec:
       serviceAccount: nse-acc
       containers:
         - name: test-common
-          image: {{ .Values.registry }}/{{ .Values.org }}/vpp-test-common:{{ .Values.tag }}
+          image: {{ .Values.registry }}/{{ .Values.org }}/test-common:{{ .Values.tag }}
+          command: ["/bin/icmp-responder-nse"]
           imagePullPolicy: {{ .Values.pullPolicy }}
           env:
+
             - name: ADVERTISE_NSE_NAME
               value: "sfc-{{ .Values.prefix }}"
             - name: ADVERTISE_NSE_LABELS

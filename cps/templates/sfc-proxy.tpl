@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: {{ .Values.pullPolicy }}
           env:
             - name: TEST_APPLICATION
-              value: "vppagent-proxy-nse"
+              value: "vppagent-firewall-nse"
             - name: ADVERTISE_NSE_NAME
               value: "sfc-{{ .Values.prefix }}"
             - name: ADVERTISE_NSE_LABELS
