@@ -6,6 +6,7 @@
 prefix: cps
 registry: jupiter.soosanint.com:4433
 org: proxy/networkservicemesh
+org_top: proxy/library
 tag: v0.2.0
 pullPolicy: IfNotPresent
 
