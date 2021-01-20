@@ -40,7 +40,7 @@ spec:
             - name: TRACER_ENABLED
               value: {{ .Values.global.JaegerTracing | default false | quote }}
             - name: JAEGER_AGENT_HOST
-              value: jaeger.nsm-system
+              value: jaeger
             - name: JAEGER_AGENT_PORT
               value: "6831"
 {{- end }}
@@ -48,7 +48,7 @@ spec:
             limits:
               networkservicemesh.io/socket: 1
         - name: nginx
-          image: {{ .Values.registry }}/networkservicemesh/nginx:latest
+          image: {{ .Values.registry }}/{{ .Values.org }}/nginx:latest
 metadata:
   name: {{ .Values.prefix }}-server-nse
   namespace: {{ .Release.Namespace }}

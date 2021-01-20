@@ -16,36 +16,51 @@ spec:
       serviceAccount: nse-acc
       containers:
         - name: proxy-nse
-          image: alpine:latest
+          image: {{ .Values.registry }}/{{ .Values.org }}/vpp-test-common:{{ .Values.tag }}
           imagePullPolicy: {{ .Values.pullPolicy }}
-          command: ['tail', '-f', '/dev/null']
-{{- if .Values.global.JaegerTracing }}
           env:
             - name: TEST_APPLICATION
-              value: "proxy-nse"
+              value: "vppagent-proxy-nse"
             - name: ADVERTISE_NSE_NAME
               value: "sfc-{{ .Values.prefix }}"
             - name: ADVERTISE_NSE_LABELS
               value: "app={{ .Values.prefix }}-proxy"
-            - name: IP_ADDRESS
-              value: "172.16.1.0/24"
             - name: OUTGOING_NSC_NAME
               value: "sfc-{{ .Values.prefix }}"
             - name: OUTGOING_NSC_LABELS
-              value: app=test
+              value: "app={{ .Values.prefix }}-proxy"
+{{- if .Values.global.JaegerTracing }}
             - name: TRACER_ENABLED
-              value: "true" 
-              jvalue: "app={{ .Values.prefix }}-proxy"
-           - name: JAEGER_AGENT_HOST
-              value: jaeger.nsm-system
+              value: "true"
+            - name: JAEGER_AGENT_HOST
+              value: jaeger
             - name: JAEGER_AGENT_PORT
               value: "6831"
 {{- end }}
           resources:
             limits:
               networkservicemesh.io/socket: 1
+          volumeMounts:
+            - mountPath: /etc/vppagent-firewall/config.yaml
+              subPath: config.yaml
+              name: vppagent-firewall-config-volume
+        - name: nginx
+          image: {{ .Values.registry }}/{{ .Values.org }}/nginx:latest
+      volumes:
+        - name: vppagent-firewall-config-volume
+          configMap:
+            name: vppagent-firewall-config-file
 metadata:
   name: {{ .Values.prefix }}-proxy
   namespace: {{ .Release.Namespace }}
-  annotations:
-    ns.networkservicemesh.io: sfc-{{ .Values.prefix }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vppagent-firewall-config-file
+  namespace: {{ .Release.Namespace }}
+data:
+  config.yaml: |
+    aclRules:
+      "Allow ICMP": "action=reflect,icmptype=8"
+      "Allow TCP 80": "action=reflect,tcplowport=80,tcpupport=80"

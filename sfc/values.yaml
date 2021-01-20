@@ -4,8 +4,8 @@
 # Declare variables to be passed into your templates.
 
 prefix: foo
-registry: docker.io
-org: networkservicemesh
+registry: jupiter.soosanint.com:4433
+org: proxy/networkservicemesh
 tag: 0.2.0
 pullPolicy: IfNotPresent
 

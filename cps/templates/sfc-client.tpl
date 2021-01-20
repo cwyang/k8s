@@ -23,4 +23,4 @@ metadata:
   name: {{ .Values.prefix }}-client
   namespace: {{ .Release.Namespace }}
   annotations:
-    ns.networkservicemesh.io.foo: sfc-{{ .Values.prefix }}
+    ns.networkservicemesh.io: sfc-{{ .Values.prefix }}

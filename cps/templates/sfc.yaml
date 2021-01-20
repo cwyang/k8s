@@ -7,20 +7,14 @@ spec:
   payload: IP
   matches:
     - match:
-{{- if .Values.global.comment }}
-
       sourceSelector:
         app: {{ .Values.prefix }}-proxy
-        app: test
-{{- end }}
       route:
         - destination:
           destinationSelector:
-            app: {{ .Values.prefix }}-server-foo
-{{- if .Values.global.comment }}
+            app: {{ .Values.prefix }}-server
     - match:
       route:
         - destination:
           destinationSelector:
             app: {{ .Values.prefix }}-proxy
-{{- end }}

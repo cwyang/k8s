@@ -4,11 +4,11 @@
 # Declare variables to be passed into your templates.
 
 prefix: cs
-registry: docker.io
-org: networkservicemesh
+registry: jupiter.soosanint.com:4433/
+org: proxy/networkservicemesh
 tag: v0.2.0
 pullPolicy: IfNotPresent
 
 global:
   # set to true to enable Jaeger tracing for NSM components
-  JaegerTracing: false
+  JaegerTracing: true
